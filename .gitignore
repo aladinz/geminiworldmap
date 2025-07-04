@@ -51,8 +51,16 @@ htmlcov/
 
 # Test files (temporary)
 test_*.html
+test-*.html
+test-*.js
 egypt_fix_complete.html
 test_realtime.html
+
+# Backup and old files
+*_old.*
+*_new.*
+*_backup.*
+README_OLD.md
 
 # Keep important files
 !README.md
