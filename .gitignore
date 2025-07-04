@@ -36,7 +36,8 @@ venv.bak/
 htmlcov/
 
 # Streamlit
-.streamlit/
+.streamlit/secrets.toml
+# Keep .streamlit/config.toml for deployment
 
 # Editor directories and files
 .vscode/*
