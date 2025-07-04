@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini World Map Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Enhanced animations and effects for World Map Explorer */
+      
+      /* Glow effects for country highlighting */
+      @keyframes glow {
+        0% { filter: drop-shadow(0 0 5px currentColor); }
+        50% { filter: drop-shadow(0 0 20px currentColor) drop-shadow(0 0 30px currentColor); }
+        100% { filter: drop-shadow(0 0 5px currentColor); }
+      }
+      
+      /* Pulse animation for high-population countries */
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+      
+      /* Smooth fade-in for data loading */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      /* Shimmer effect for loading states */
+      @keyframes shimmer {
+        0% { background-position: -200px 0; }
+        100% { background-position: calc(200px + 100%) 0; }
+      }
+      
+      /* Zoom bounce effect */
+      @keyframes zoomBounce {
+        0% { transform: scale(0.95); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+      }
+      
+      /* Search highlight animation */
+      @keyframes highlightBounce {
+        0% { transform: scale(1); filter: drop-shadow(0 0 0px #ffd700); }
+        50% { transform: scale(1.1); filter: drop-shadow(0 0 15px #ffd700); }
+        100% { transform: scale(1); filter: drop-shadow(0 0 8px #ffd700); }
+      }
+      
+      /* Tooltip entrance animation */
+      @keyframes tooltipEnter {
+        from { 
+          opacity: 0; 
+          transform: translateX(20px) scale(0.9); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translateX(0) scale(1); 
+        }
+      }
+      
+      /* CSS classes for animations */
+      .country-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        filter: drop-shadow(0 0 8px currentColor);
+      }
+      
+      .country-highlighted {
+        animation: highlightBounce 1.5s ease-in-out infinite;
+        transform-origin: center;
+      }
+      
+      .country-pinned {
+        animation: glow 2s ease-in-out infinite;
+        transform-origin: center;
+      }
+      
+      .country-high-population {
+        animation: pulse 3s ease-in-out infinite;
+        transform-origin: center;
+      }
+      
+      .tooltip-animated {
+        animation: tooltipEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .data-loading {
+        background: linear-gradient(90deg, #374151 0%, #4b5563 50%, #374151 100%);
+        background-size: 200px 100%;
+        animation: shimmer 1.5s infinite;
+      }
+      
+      .zoom-bounce {
+        animation: zoomBounce 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+      
+      /* Smooth transitions for all interactive elements */
+      .smooth-transition {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      /* Enhanced button hover effects */
+      .btn-hover {
+        transition: all 0.2s ease-in-out;
+      }
+      
+      .btn-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* Search bar animations */
+      .search-focus {
+        transition: all 0.3s ease-in-out;
+      }
+      
+      .search-focus:focus {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+      }
+      
+      /* For react-tooltip */
+      .custom-tooltip {
+        background-color: #1f2937 !important; /* bg-gray-800 */
+        color: #f9fafb !important; /* text-gray-50 */
+        border: 1px solid #4b5563 !important; /* border-gray-600 */
+        border-radius: 8px !important; /* rounded-lg */
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+        max-width: 300px;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        opacity: 1 !important;
+        transition: opacity 0.2s ease-in-out;
+        z-index: 9999 !important;
+        pointer-events: none !important;
+      }
+      
+      /* Ensure map container is stable */
+      .map-container {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      /* Enhanced SVG animations */
+      svg {
+        display: block !important;
+        max-width: 100%;
+        height: auto;
+        pointer-events: auto !important;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      /* Stabilize geography elements with smooth transitions */
+      path {
+        pointer-events: auto !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      /* Prevent tooltip from interfering with mouse events */
+      [data-tooltip-id] {
+        pointer-events: auto !important;
+      }
+      
+      /* Real-time components styling */
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      
+      /* Live indicator pulse */
+      @keyframes livePulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.6; }
+        100% { opacity: 1; }
+      }
+      
+      .animate-pulse {
+        animation: livePulse 2s ease-in-out infinite;
+      }
+      
+      /* News ticker animation */
+      @keyframes slideUp {
+        from { transform: translateY(10px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      
+      .news-item {
+        animation: slideUp 0.3s ease-out;
+      }
+      
+      /* Travel info grid styling */
+      .travel-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+      
+      /* Scrollbar styling for tooltip */
+      .tooltip-content::-webkit-scrollbar {
+        width: 4px;
+      }
+      
+      .tooltip-content::-webkit-scrollbar-track {
+        background: rgba(55, 65, 81, 0.3);
+        border-radius: 2px;
+      }
+      
+      .tooltip-content::-webkit-scrollbar-thumb {
+        background: rgba(156, 163, 175, 0.5);
+        border-radius: 2px;
+      }
+      
+      .tooltip-content::-webkit-scrollbar-thumb:hover {
+        background: rgba(156, 163, 175, 0.7);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900 text-gray-100">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

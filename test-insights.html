@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Insights Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #1a1a1a;
+            color: white;
+        }
+        .test-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #9333ea;
+        }
+        .insights {
+            background: #3a1a5c;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #9333ea;
+        }
+        .insight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 8px 0;
+            color: #e9d5ff;
+            font-size: 14px;
+        }
+        .similar-countries {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #7c3aed;
+        }
+        .country-tag {
+            display: inline-block;
+            background: #7c3aed;
+            color: #e9d5ff;
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .country-tag:hover {
+            background: #8b5cf6;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧠 Smart Insights Testing</h1>
+    <p>Testing the new personalized country insights system!</p>
+
+    <div class="test-section">
+        <h2>✅ What's Fixed</h2>
+        <ul>
+            <li><strong>Unique Insights:</strong> Each country now gets personalized insights based on your behavior</li>
+            <li><strong>User Preferences:</strong> Insights adapt to your favorite regions, budget, safety preferences</li>
+            <li><strong>Smart Comparisons:</strong> Compares countries to your most-viewed destinations</li>
+            <li><strong>Clickable Similar Countries:</strong> Similar destinations are now clickable</li>
+            <li><strong>Learning System:</strong> Insights improve as you explore more countries</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 How to Test</h2>
+        <ol>
+            <li><strong>Start Fresh:</strong> Open the main app at <a href="http://localhost:5177" target="_blank">localhost:5177</a></li>
+            <li><strong>Hover Countries:</strong> Move your mouse over different countries to see unique insights</li>
+            <li><strong>Build Preferences:</strong> Search, click, and rate countries to build your profile</li>
+            <li><strong>Compare Insights:</strong> Notice how insights change based on your activity</li>
+            <li><strong>Click Similar Countries:</strong> Test the clickable similar destination tags</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Example Smart Insights</h2>
+        
+        <h3>For a New User (no preferences yet):</h3>
+        <div class="insights">
+            <div class="insight-item">
+                <span>💡</span>
+                <span>Welcome to France! Start exploring more countries to get personalized insights.</span>
+            </div>
+        </div>
+
+        <h3>For a User who loves Cultural destinations in Europe with Medium budget:</h3>
+        <div class="insights">
+            <div class="insight-item">
+                <span>💡</span>
+                <span>Perfect match! Italy is in Europe, one of your favorite regions to explore.</span>
+            </div>
+            <div class="insight-item">
+                <span>💡</span>
+                <span>Budget-friendly choice! Italy's medium cost aligns perfectly with your travel budget.</span>
+            </div>
+            <div class="insight-item">
+                <span>💡</span>
+                <span>Rich heritage! Italy offers deep cultural experiences that align with your interests.</span>
+            </div>
+            <div class="similar-countries">
+                <div style="color: #e9d5ff; font-size: 12px; margin-bottom: 5px;">Similar destinations:</div>
+                <span class="country-tag">Greece</span>
+                <span class="country-tag">Spain</span>
+                <span class="country-tag">France</span>
+            </div>
+        </div>
+
+        <h3>For a User who previously rated a country:</h3>
+        <div class="insights">
+            <div class="insight-item">
+                <span>💡</span>
+                <span>You rated Japan 5/5 stars. Seems like a favorite!</span>
+            </div>
+            <div class="insight-item">
+                <span>💡</span>
+                <span>Feel secure! Japan's safety rating (5/5) matches your comfort level.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Testing Scenarios</h2>
+        <ol>
+            <li><strong>Regional Learning:</strong> Hover several European countries, then try an Asian country - notice different insights</li>
+            <li><strong>Budget Preferences:</strong> Explore both expensive (Switzerland) and budget (Thailand) countries</li>
+            <li><strong>Safety Consciousness:</strong> Compare insights for high-safety (Denmark) vs lower-safety countries</li>
+            <li><strong>Similar Destinations:</strong> Click on similar country tags to navigate</li>
+            <li><strong>Rating Impact:</strong> Rate a country and see how insights change</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>⚡ Live Testing</h2>
+        <p><strong>Go to the main app:</strong> <a href="http://localhost:5177" target="_blank" style="color: #9333ea;">http://localhost:5177</a></p>
+        <p>Hover over different countries and watch how the Smart Insights section changes for each one!</p>
+    </div>
+</body>
+</html>

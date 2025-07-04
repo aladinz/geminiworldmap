@@ -1,0 +1,5 @@
+{
+  "name": "Gemini World Map Explorer",
+  "description": "An interactive world map that visualizes country populations with a color gradient. Hover over a country to get detailed information like its capital, population, and key facts, powered by the Gemini API.",
+  "requestFramePermissions": []
+}
