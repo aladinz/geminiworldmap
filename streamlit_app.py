@@ -10,10 +10,13 @@ import time
 import random
 from typing import Dict, List, Tuple, Optional
 import os
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# Load environment variables (optional)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv is optional
 
 # Configure Streamlit page
 st.set_page_config(
